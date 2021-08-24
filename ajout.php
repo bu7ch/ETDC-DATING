@@ -80,7 +80,7 @@ include_once('./shared/header.php');
   </table>
   </fieldset>
 </form>
-
+<a href="index.php">Accueil</a>
 <?php 
 // insert dans personne
 if (isset($_POST['envoie'])) {
