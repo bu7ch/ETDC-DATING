@@ -1,5 +1,5 @@
 <header>
-  <h1>SDating Sport Saas</h1>
+  <h1>Dating Sport Saas</h1>
   <div>
     <a href="ajout.php">
         <button>inscription</button>

@@ -1,0 +1,74 @@
+<?php 
+require_once('initialize.php');
+?>
+<?php 
+include_once('./shared/header.php');
+?>
+<h3>Le Site des rencontres sportives</h3>
+
+<form action="recherche.php" method="post">
+  <!-- 1er groupe -->
+<fieldset>
+  <legend>Recherche des partenaires</legend>
+  <table>
+    <tbody>
+      <!-- ligne 1 -->
+      <tr>
+        <td>Sport Pratiqué:</td>
+        <td>
+          <select name="designation">
+            <option value="NULL"> Choisissez !</option>
+            <?php 
+            // creation dynamique de la liste de séléction
+            //connexion 
+            // lire la table sport
+            $requete = "SELECT id_sport , designation FROM sport ORDER BY designation";
+            $result = $connexion->query($requete);
+            if($result){
+              while($row = $result->fetch()) {
+                echo "<option value=".$row[0].">".$row[1]."</option>";
+              }
+            }
+            ?>
+          </select>
+        </td>
+      </tr>
+      <!-- ligne 2 -->
+      <tr>
+        <td>Niveau:</td>
+        <td>
+          <select name="niveau" >
+            <option value="1">Débutant</option>
+            <option value="2">Confirmé</option>
+            <option value="3">Pro</option>
+            <option value="4">Supporter</option>
+          </select>
+        </td>
+      </tr>
+      <!-- ligne 3 -->
+      <tr>
+        <td>Département:</td>
+        <td>
+          <select name="departement" >
+            <option value="NULL"> Choisissez !</option>
+          <?php 
+          $result = $connexion->query("SELECT departement FROM personne");
+          if($result){
+            while($row = $result->fetch()){
+              $tabdepartement[] = $row[0];
+            }
+            $tabdepartement = array_unique($tabdepartement);
+            sort($tabdepartement);
+            $count = count($tabdepartement);
+            for($i=0;$i < $count;$i++) {
+              echo "<option value=".$tabdepartement[$i].">".$tabdepartement[$i]."</option>";
+            }
+          }
+          ?>
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</fieldset>
+</form>
