@@ -68,7 +68,39 @@ include_once('./shared/header.php');
           </select>
         </td>
       </tr>
+      <tr>
+        <td>
+          <input type="submit" name="envoie" value="Rechercher">
+        </td>
+          <td>
+            <input type="reset" name="efface" value="Effacer">
+        </td>
+      </tr>
     </tbody>
   </table>
 </fieldset>
 </form>
+
+<?php 
+if(isset($_POST['envoie'])){
+  if(!$connexion){
+    echo 'ERREUR: $erreur <br>';
+  }
+  else {
+    $niveau = $_POST['niveau'];
+    $designation = $_POST['designation'];
+    $departement = $_POST['departement'];
+
+    $req = "SELECT nom, prenom, email, designation FROM personne, pratique, sport 
+    WHERE personne.id_personne = pratique.id_personne AND sport.id_sport = pratique.id_sport AND pratique.niveau = $niveau AND sport.id_sport = $designation AND personne.departement = $departement";
+    $result = $connexion->query($req);
+    echo "<table border=\"1\" rules=\"rows\" width=\"100%\">";
+    echo "<tr><th colspan=\"3\"> Liste des partenaires disponibles </th>";
+    while ($row = $result->fetch()) {
+       echo "<tr><td>" .$row['prenom']. "</td><td>" .$row['nom']. "</td><td>" .$row['email']. "</td></tr>";
+    }
+    echo "</table>";
+     }
+  }
+
+?>
