@@ -1,0 +1,1 @@
+<p>Copyright <?php echo date("Y"); ?>, Dating Sport</p>
